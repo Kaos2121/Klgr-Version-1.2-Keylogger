@@ -1,0 +1,8 @@
+scapy
+flask
+flask-limiter
+requests
+cryptography
+PyCryptoDome
+python-dotenv
+aiohttp
