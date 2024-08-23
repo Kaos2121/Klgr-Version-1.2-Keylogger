@@ -1,8 +1,4 @@
-scapy
-flask
-flask-limiter
+keyboard
 requests
-cryptography
-PyCryptoDome
-python-dotenv
-aiohttp
+discord-webhook
+pywin32
