@@ -129,5 +129,3 @@ This project is licensed under the MIT License. See the `LICENSE.md` file for de
 **Made by Matt Lett, [github.com/Kaos2121](https://github.com/Kaos2121).**
 
 ---
-
-This version of the README reflects the code update from version 1.0 to 1.1, noting the fixes to keylogging issues and the timestamp for the latest changes.
