@@ -1,3 +1,4 @@
+Here's the updated README reflecting the version update to 1.1 and mentioning the changes:
 
 ---
 
@@ -94,7 +95,7 @@ This command will generate a `dist` folder containing the `klgr.exe` file.
    ./klgr.exe
    ```
 
-Test the keylogger on a controlled environment to ensure it captures keystrokes and sends them to the Discord webhook correctly.
+Test the keylogger in a controlled environment to ensure it captures keystrokes and sends them to the Discord webhook correctly.
 
 ## Usage
 
@@ -123,3 +124,11 @@ Contributions are welcome! Please fork the repository, create a new branch, and 
 This project is licensed under the MIT License. See the `LICENSE.md` file for details.
 
 ---
+
+**Update Notice:** This README was last updated on **August 23, 2024**, with version **1.1**. The latest update fixed issues with the keylogging functionality that was not working correctly in the previous version 1.0, and added a watermark. 
+
+**Made by Matt Lett, [github.com/Kaos2121](https://github.com/Kaos2121).**
+
+---
+
+This version of the README reflects the code update from version 1.0 to 1.1, noting the fixes to keylogging issues and the timestamp for the latest changes.
