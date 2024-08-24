@@ -1,4 +1,3 @@
-Here's the updated README reflecting the version update to 1.1 and mentioning the changes:
 
 ---
 
