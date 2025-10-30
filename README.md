@@ -126,6 +126,4 @@ This project is licensed under the MIT License. See the `LICENSE.md` file for de
 
 **Update Notice:** This README was last updated on **August 23, 2024**, with version **1.1**. The latest update fixed issues with the keylogging functionality that was not working correctly in the previous version 1.0, and added a watermark. 
 
-**Made by Matt Lett, [github.com/Kaos2121](https://github.com/Kaos2121).**
 
----
